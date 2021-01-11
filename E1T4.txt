@@ -1,0 +1,23 @@
+Based on the architecture diagram, and the steps you have taken so far to upload data and access the application web service, identify at least 2 obvious poor practices as it relates to security.  Include justification.
+
+# Poor practice 1
+The following inboud rules are set to the Web Application (Security group: WebAppSG), but they are unecessary:
+- Inbound: TCP on port 80
+- Inbound: All traffic in all ports
+- Inboud: SSH on port 22
+Since we don't need any of these inbound rules, we could delete them and work with the Least Priviledge access. Also limit access to this application, just by a load balancer inside this subnet.
+
+Also, we can limit the outbound to just port 80:
+- Outbound: TCP on port 80.
+Other ports are not necessary to be set on this security group.
+
+# Poor practice 2
+S3 buckets don't have any specific permission (ACL) to restrict who perform any action on them. At the moment, is possible to the bucket owner only to read/edit/delete/create items on the bucket and itself. We can limit the buckets and provide specific ACLs to those who can access the data, upload and manage it.
+
+Also, the buckets are configured to being accessed from outside the VPC, should be limited only internally.
+
+# Poor practice 3
+InstanceRolePolicy-C3 we could limit the rule to just he created buckes and not all of them. We can use Least Priviledge access.
+
+
+
