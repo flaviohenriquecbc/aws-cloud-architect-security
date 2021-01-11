@@ -1,3 +1,48 @@
 Research and analyze which of the vulnerabilities appear to be related to the code that was deployed for the environment in this project.
-
 Bonus - provide recommendations on how to remediate the vulnerabilities.
+
+From AWS Inspector:
+On instance i-02fa9d1d7aedd58ac, ports are reachable from the internet through ENI eni-0dfb6613a5ef6e349 and security group sg-0fffbe1489c52fdb5
+On instance i-02fa9d1d7aedd58ac, UDP port 22 which is associated with 'SSH' is reachable from the internet
+On instance i-02fa9d1d7aedd58ac, UDP port 22 which is associated with 'LDAP' is reachable from the internet
+On instance i-02fa9d1d7aedd58ac, TCP port 22 which is associated with 'SSH' is reachable from the internet
+On instance i-02fa9d1d7aedd58ac, UDP port 80 which is associated with 'HTTP' is reachable from the internet
+On instance i-02fa9d1d7aedd58ac, UDP port 3389 which is associated with 'RDP' is reachable from the internet
+On instance i-02fa9d1d7aedd58ac, TCP port 80 which is associated with 'HTTP' is reachable from the internet
+On instance i-02fa9d1d7aedd58ac, UDP port 21 which is associated with 'FTP' is reachable from the internet
+On instance i-02fa9d1d7aedd58ac, UDP port 20 which is associated with 'FTP' is reachable from the internet
+On instance i-02fa9d1d7aedd58ac, UDP port 4045 which is associated with 'NFS' is reachable from the internet
+On instance i-02fa9d1d7aedd58ac, TCP port 88 which is associated with 'Kerberos' is reachable from the internet
+On instance i-02fa9d1d7aedd58ac, TCP port 111 which is associated with 'NFS' is reachable from the internet
+On instance i-02fa9d1d7aedd58ac, TCP port 67 which is associated with 'DHCP' is reachable from the internet
+On instance i-02fa9d1d7aedd58ac, TCP port 68 which is associated with 'DHCP' is reachable from the internet
+On instance i-02fa9d1d7aedd58ac, TCP port 137 which is associated with 'NetBIOS' is reachable from the internet
+On instance i-02fa9d1d7aedd58ac, TCP port 139 which is associated with 'NetBIOS' is reachable from the internet
+On instance i-02fa9d1d7aedd58ac, TCP port 111 which is associated with 'RPC' is reachable from the internet
+On instance i-02fa9d1d7aedd58ac, TCP port 135 which is associated with 'RPC' is reachable from the internet
+On instance i-02fa9d1d7aedd58ac, TCP port 23 which is associated with 'Telnet' is reachable from the internet
+On instance i-02fa9d1d7aedd58ac, TCP port 42 which is associated with 'WINS' is reachable from the internet
+
+From these logs, we notice that:
+- we can remove access to ports that are not necessary on the security group associated to this instance;
+- limit the IP that can connect to the instances;
+
+
+From AWS Config:
+securityhub-s3-bucket-ssl-requests-only-43e5927b: Checks whether S3 buckets have policies that require requests to use Secure Socket Layer (SSL).
+
+From these logs, we notice that:
+
+- Checks whether S3 buckets have policies that require requests to use Secure Socket Layer (SSL).
+- EC2 instances should be managed by AWS Systems Manager
+- CloudTrail should have encryption at-rest enabled
+- Application Load Balancer should be configured to redirect all HTTP requests to HTTPS
+
+
+
+
+
+
+
+
+
