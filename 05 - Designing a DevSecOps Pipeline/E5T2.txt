@@ -1,0 +1,19 @@
+# Identify tools that will allow you to do the following:
+
+## Scan infrastructure as code templates
+Possible tools: Regula, Chef Inspect or Terrascan. 
+
+### Example vulnerability
+It can identify SSH with password enabled, s3 buckets without any restriction, and much more.
+
+##Scan AMI’s or containers for OS vulnerabilities
+Possible tools: Clair, Anchore, Trivy
+
+### Example vulnerability
+It can be identified out of date image versions, missing Patches, and common vulnerabilities.
+
+##Scan an AWS environment for cloud configuration vulnerabilities
+Possible tools: AWS Config, AWS Inspector, AWS GuardDuty.
+
+### Example vulnerability
+It can identify roles with unecessary permissions and possible vulnerabilities; Over permission for instances; Lack of MFA for the users;
