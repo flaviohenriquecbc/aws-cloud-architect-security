@@ -1,9 +1,12 @@
 # Identify 2-3 changes that can be made to our environment to prevent an ssh brute force attack from the internet.
 
-1. Create a white list of IPs that can have access with SSH.
-2. Don't allow SSH with password.
-3. Allow SSH only for users with specific roles
+1. Create a white list of IPs that can have access with SSH or allow only using Session Manager.
+2. Don't allow SSH with password. Disable it.
+3. Allow SSH only for users with specific roles or using using Session Manager.
 
 # Neither instance should have had access to the secret recipes bucket, in the even that instance API credentials were compromised how could we have prevented access to sensitive data.
-1. Use correct ACL to allow access to the buckets;
-2. Encrypt the content of the buckets;
+1. Limit the buckets that can be accessed, instead of using wildcard selector, allow access just for the buckets needed. 
+2. Enable server side encryption for the buckets;
+3. Limit the instances that can access the content of the buckets.
+
+

@@ -1,19 +1,42 @@
 # Identify tools that will allow you to do the following:
 
 ## Scan infrastructure as code templates
-Possible tools: Regula, Chef Inspect or Terrascan. 
+Possible tools:
+- Regula: https://github.com/fugue/regula
+- Chef Inspect: https://github.com/inspec/inspec
+- Terrascan: https://github.com/accurics/terrascan
 
 ### Example vulnerability
-It can identify SSH with password enabled, s3 buckets without any restriction, and much more.
+It can identify SSH with password enabled, s3 buckets without any restriction, and much more. Examples:
+Regula: IAM policies with full "*:*" administrative privileges
+Chef Inspect: Should have MFA enabled
+Terrascan : Ingress open to 0.0.0.0/0
 
 ##Scan AMI’s or containers for OS vulnerabilities
-Possible tools: Clair, Anchore, Trivy
+Possible tools:
+- Clair: https://github.com/quay/clair
+- Anchore: https://github.com/anchore/anchore-engine
+- Trivy: https://github.com/aquasecurity/trivy
 
 ### Example vulnerability
-It can be identified out of date image versions, missing Patches, and common vulnerabilities.
+It can be identified out-of-date image versions, missing Patches, and common vulnerabilities. Examples:
+- Clair: Read/write access of root/.rhosts only by root
+- Anchore:
+    Image id: 1d310298312903812938021
+    Repo Tag: docker.io/worpress:latest
+    Trigger id: CVE-2017-14062+libdin11
+    Gate: vulnerabilities
+    Check output: HIGH vulnerability found in os package type (dpkg) - libdin11 (CVE-2017-14062 - htts://security-tracker.debian.org/tracker/CVE-2017-14062)
+- Trivy: 
+    Library: curl
+    vulnerability Id: CVE-2018-14618
+    Severity: CRITICAL
 
 ##Scan an AWS environment for cloud configuration vulnerabilities
-Possible tools: AWS Config, AWS Inspector, AWS GuardDuty.
+Possible tools: AWS Config, AWS Inspector and AWS GuardDuty;
 
 ### Example vulnerability
 It can identify roles with unecessary permissions and possible vulnerabilities; Over permission for instances; Lack of MFA for the users;
+- AWS Config: s3-bucket-ssl-requests-only - Checks whether S3 buckets have policies that require requests to use Secure Socket Layer (SSL). The rule is COMPLIANT if buckets explicitly deny access to HTTP requests. The rule is NON_COMPLIANT if bucket policies allow HTTPS requests.
+- AWS Inspector: On instance i-02fa9d1d7aedd58ac, UDP port 22 which is associated with 'LDAP' is reachable from the internet
+- AWS GuardDuty: UnauthorizedAccess:EC2/SSHBruteForce : Instance: i-096fe001a4bdf5d9b - 54.36.165.34 is performing SSH brute force attacks against i-096fe001a4bdf5d9b. Brute force attacks are used to gain unauthorized access to your instance by guessing the SSH password
